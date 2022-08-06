@@ -1,0 +1,59 @@
+Introduction
+
+In “Computational Physics”. Giordono describes and models a system of a single decaying nucleus to demonstrate an application of Euler’s method.  Using this problem as a motivation, we expand our analysis to a system of two decaying particles.  In our system we choose to have the first particle, nucleus A, decay into our second particle, nucleus B.  Each particle has a unique decay time:  and  .
+
+Our system is modeled by the following differential equations:
+
+
+
+
+While it is possible to find analytic solutions to these differential equations, we endeavor to, like Giordono, find a numerical approximation to develop general computational methods that can be applied to other problems.  
+
+We are bounded by the condition that neither  or  can be explicitly measured in the lab but only the ratio of  can be measured to within  accuracy.
+
+In the following paper we will describe our method for finding a model of the decay of nuclei A and B.  We will show how we found the dependence of our model on the ratio of the decay times of nucleus A to nucleus B, and the error in time resultant from the error in accuracy of measurement of the ratio.  
+
+Methods 
+
+Since only the population ratio can be measured, as opposed to the populations of the individual nuclei types, we frame our implementation in terms of the population ratio as a whole.  Then, in order to begin the linearization in our use of Euler’s method, we first define  .  Our ultimate goal is to devise some sort of recursive formula, but first we linearize  to get: .   This is heartening because we know the ratio that  represents and so the derivative is easily found.  
+
+
+
+
+And then, since 
+
+
+
+And 
+
+
+
+We can substitute these equations into our equation for  to yield
+
+
+
+
+From here we simply plug back into :
+
+
+
+The above equation is the recursive formula we use in our computational implementation.  Then, since , and , we find that 
+
+
+
+
+Results
+ 
+
+Figure 1 illustrates the analytic solution and the exact solution (the numerical solution) for , or .  Figure 2 illustrates the solutions for .  Figure 3 illustrates the solutions for .  We see that for , the slope of the curve is positive but decreasing.  When , we see that the exact and analytic solutions are linear.  When , we see that the slope of the curve is  positive and increasing.  The ratio of the 
+population of nucleus B to nucleus A increases regardless of the ratio of decay time for A to decay time for B.  However, the value for  does impact the rate of increase of the population ratio.  As  decreases, the rate of increase increases.  
+
+
+
+ 
+
+
+
+ Conclusions
+
+We find that our numerical model matches the analytic solution satisfactorily.  We also find that the dependence of our results on  also is satisfactory.  The population of nucleus B compared to the population of nucleus A should depend on how long it takes nucleus B to decay compared to how long it takes nucleus A to decay.  If nucleus B takes longer to decay than nucleus A, we would expect the ratio of B to A to increase at an increasing rate.  Likewise, if nucleus A takes longer to decay than nucleus B, then we would expect the ratio of B to A to increase at a decreasing rate.  
